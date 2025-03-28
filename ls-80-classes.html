@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Classes</title>
+</head>
+<body>
+<!-- activity1  -->
+<h2>The JavaScript <i>this</i> Keyword</h2>
+
+<p id="para1"></p>
+<p id="para2"></p>
+
+<!-- activity2  -->
+<h2>JavaScript Class</h2>
+<p>How to use a JavaScript Class.</p>
+<p id="student1"></p>
+<p id="student2"></p>
+
+<!-- activity3  -->
+
+<h2>JavaScript Class Inheritance</h2>
+<p>Use the "extends" keyword to inherit all methods from another class.</p>
+<p>Use the "super" method to call the parent's constructor function.</p>
+<p id="details"></p>
+
+<!-- activity 4  -->
+<p id="details"></p>
+<p id="greetings"></p>
+
+
+<script>
+//activity1
+// Create an object:
+var person = {
+firstName: "John",
+lastName: "Doe",
+id: 5566,
+fullName: function () {
+return this.firstName + " " + this.lastName;
+}
+};
+// Create a function:
+function myFunction() {
+return this;
+}
+// Display data from the object:
+// this represents the person object
+document.getElementById("para1").innerHTML = person.fullName();
+// Display data from the function:
+// this represents the object that "owns" myFunction
+document.getElementById("para2").innerHTML = myFunction();
+
+//activity2
+
+// creating a class 
+class student {
+constructor(name, year) {
+this.name = name;
+this.year = year;
+}
+// creating age method for class student
+age() {
+let date = new Date();
+return date.getFullYear() - this.year;
+}
+}
+// use student class with two objects
+student1 = new student("Riya", 2014);
+document.getElementById("student1").innerHTML =
+"My name is " + student1.name + ". I born in " + student1.year + ". And my age is  " + student1.age();
+
+student2 = new student("Tina", 2018);
+document.getElementById("student2").innerHTML =
+"My name is " + student2.name + ". I born in " + student2.year + ". And my age is  " + student2.age();
+
+//activity3 inheritance 
+
+class Car {
+constructor(brand) {
+this.carname = brand;
+}
+present() {
+return 'I have a ' + this.carname;
+}
+}
+class Model extends Car {
+constructor(brand, mod) {
+super(brand);
+this.model = mod;
+}
+show() {
+return this.present() + ', it is a ' + this.model;
+}
+}
+let myCar = new Model("Ford", "Mustang");
+document.getElementById("details").innerHTML = myCar.show();
+
+//activity 4 ACP
+
+    class Student {
+        constructor(name) {
+            this.studentName = name;
+        }
+        static hello() {
+            return "Hello";
+        }
+        present() {
+            return 'My name is  ' + this.studentName;
+        }
+    }
+
+    class Grade extends Student {
+        constructor(name, grade) {
+            super(name);
+            this.studentGrade = grade;
+        }
+        show() {
+            return this.present() + ', from ' + this.studentGrade;
+        }
+    }
+
+    let myStudent = new Grade("Tina", "grade 6");
+    document.getElementById("details").innerHTML = myStudent.show();
+    // hello() is a static method cannot be accessed by object myStudent
+    document.getElementById("greetings").innerHTML = Student.hello();
+
+</script>
+</body>
+</html>
